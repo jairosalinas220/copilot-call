@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copilot</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        * {
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <div class="max-w-2xl mx-auto flex flex-col items-center gap-8 p-5">
+        <h1 class="text-3xl font-semibold">Dirección</h1>
+        <div class="flex flex-wrap justify-center w-full gap-2.5">
+                <!-- <input type="email" name="floating_email" id="floating_email" class="py-2.5 px-0 text-xl text-gray-900 bg-transparent border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
+                <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">x</label> -->
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" onpaste="distribuirTexto(event)" name="postal code" placeholder="Código postal">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5"  name="region" placeholder="Región" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5"  name="Commune" placeholder="Comuna" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5"  name="locality" placeholder="Localidad" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="address" placeholder="Calle" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="address_number" placeholder="Número" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="inside" placeholder="Interior" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="coordinates" placeholder="Cordenadas" oninput="updateComment()">
+
+        </div>
+        <h1 class="text-3xl font-semibold">Comentario</h1>
+        <div class="flex p-1 h-fit gap-8 rounded-lg">
+            <button class="tablink cursor-pointer bg-zinc-700 hover:bg-gray-800">ContraEntrega</button>
+            <button class="tablink cursor-pointer bg-zinc-700 hover:bg-gray-800">Blue Express</button>
+        </div>
+
+        <div class="tabcontent flex flex-wrap justify-center w-full gap-3" id="blueexpress">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_description" placeholder="Desc. Casa" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="reference" placeholder="Referencia" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_side" placeholder="Calle de la casa del lado" oninput="updateComment()">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house description" placeholder="Desc. Casa del lado" oninput="updateComment()">
+            <input type="number" class="input-box bg-neutral-800 rounded-lg p-2.5" name="number" placeholder="Número Adiccional" oninput="updateComment()">
+            <input name="products" data-dropdown-toggle="products" class="input-box bg-neutral-800 rounded-lg p-2.5" placeholder="Producto" list="products" oninput="updateComment()">
+            <div id="products" class="bg-gray-800">
+                <li class="decor" value="5 duston gel + 4 duston gel gift 184950">5 duston gel + 4 duston gel gift</li>
+                <li class="decor" value="4 duston gel + 3 duston gel gift 147960">4 duston gel + 3 duston gel gift</li>
+                <li class="decor" value="3 duston gel + 2 duston gel gift 110970">3 duston gel + 2 duston gel gift</li>
+                <li class="decor" value="2 duston gel + 1 duston gel gift 73980">2 duston gel + 1 duston gel gift</li>
+                <li class="decor" value="1 duston gel 37990 + delivery 6000">1 duston gel</li>
+                <li class="decor" value="5 incasol + 4 incasol gift 184950">5 incasol + 4 incasol gift</li>
+                <li class="decor" value="4 incasol + 3 incasol gift 147960">4 incasol + 3 incasol gift</li>
+                <li class="decor" value="3 incasol + 2 incasol gift 110970">3 incasol + 2 incasol gift</li>
+                <li class="decor" value="2 incasol + 1 incasol gift 73980">2 incasol + 1 incasol gift</li>
+                <li class="decor" value="1 incasol 37990 + delivery 6000">1 incasol</li>
+                <li class="decor" value="5 lutevid + 4 lutevid gift 184950">5 lutevid + 4 lutevid gift</li>
+                <li class="decor" value="4 lutevid + 3 lutevid gift 147960">4 lutevid + 3 lutevid gift</li>
+                <li class="decor" value="3 lutevid + 2 lutevid gift 110970">3 lutevid + 2 lutevid gift</li>
+                <li class="decor" value="2 lutevid + 1 lutevid gift 73980">2 lutevid + 1 lutevid gift</li>
+                <li class="decor" value="1 lutevid 37990 + delivery 6000">1 lutevid</li>
+                <li class="decor" value="5 elastica + 4 elastica gift 184950">5 elastica + 4 elastica gift</li>
+                <li class="decor" value="4 elastica + 3 elastica gift 147960">4 elastica + 3 elastica gift</il>
+                <li class="decor" value="3 elastica + 2 elastica gift 110970">3 elastica + 2 elastica gift</li>
+                <li class="decor" value="2 elastica + 1 elastica gift 73980">2 elastica + 1 elastica gift</li>
+                <li class="decor" value="1 elastica 37990 + delivery 6000">1 elastica</li>
+                <li class="decor" value="5 oxys + 4 oxys gift + 1 lutevid gift 184950">5 oxys + 4 oxys gift + 1 lutevid gift</li>
+                <li class="decor" value="4 oxys + 3 oxys gift + 1 lutevid gift 147960">4 oxys + 3 oxys gift + 1 lutevid gift</li>
+                <li class="decor" value="3 oxys + 2 oxys gift + 1 lutevid gift 110970">3 oxys + 2 oxys gift + 1 lutevid gift</li>
+                <li class="decor" value="2 oxys + 1 oxys gift + 1 lutevid gift 73980">2 oxys + 1 oxys gift + 1 lutevid gift</li>
+                <li class="decor" value="1 oxys 37990 + delivery 6000">1 oxys</li>
+            </div>
+            <h1 class="text-3xl font-semibold">Comentario Final</h1>
+        </div>
+        <div class="tabcontent flex flex-wrap justify-center w-full gap-3 hidden" id="contraentrega">
+            contraentrega
+        </div>
+        <input type="text" class="bg-neutral-800 rounded-lg p-2.5 w-full min-h-20" name="final_comment" placeholder="Comentario final">
+    </div>
+</body>
+<script>
+    function updateComment() {
+        const locality= document.getElementsByName("locality")[0].value.trim();
+        const address = document.getElementsByName("address")[0].value.trim();
+        const address_number = document.getElementsByName("address_number")[0].value.trim();
+        const reference = document.getElementsByName("reference")[0].value.trim();
+        const house_description = document.getElementsByName("house description")[0].value.trim();
+        const house_side = document.getElementsByName("house_side")[0].value.trim();
+        const additionalNumber = document.getElementsByName("number")[0].value.trim() ?  `${document.getElementsByName("number")[0].value.trim()} WH` : "WH";
+        const product = document.getElementsByName("products")[0].value.trim();
+        const finalComment = `${locality} / ${address} ${address_number}  / ${reference}, ${house_description} / ${house_side} / ${additionalNumber} / ${product}`.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+        document.getElementsByName("final_comment")[0].value = finalComment;
+    }
+    function distribuirTexto(event) {
+        event.preventDefault();
+        const textPaste = (event.clipboardData || window.clipboardData).getData('text');
+        let textDiv = textPaste.split("\t");
+        let inputs = document.querySelectorAll(".input-box");
+        for (let i = 0; i < inputs.length; i++) {
+            if (textDiv[i]) {
+                inputs[i].value = textDiv[i];
+            }
+        }
+    }
+//         function changeCurrier(evt, cityName) {
+//   // Declare all variables
+//   var i, tabcontent, tablinks;
+
+//   // Get all elements with class="tabcontent" and hide them
+//   tabcontent = document.getElementsByClassName("tabcontent");
+//   for (i = 0; i < tabcontent.length; i++) {
+//     tabcontent[i].style.display = "none";
+//   }
+
+//   // Get all elements with class="tablinks" and remove the class "active"
+//   tablinks = document.getElementsByClassName("tablinks");
+//   for (i = 0; i < tablinks.length; i++) {
+//     tablinks[i].className = tablinks[i].className.replace(" active", "");
+//   }
+
+//   // Show the current tab, and add an "active" class to the button that opened the tab
+//   document.getElementById(cityName).style.display = "block";
+//   evt.currentTarget.className += " active";
+// }
+    const tablinks = document.querySelectorAll(".tablink");
+    const tabcontent = document.querySelectorAll(".tabcontent");
+    tablinks.forEach((tablink, i) => {
+        tablink.addEventListener("click", () => {
+            target = tablink
+            tablinks.forEach((tab, j) => {
+                tab.classList.remove("bg-zinc-700");
+                tabcontent[j].classList.add('hidden');
+            });;
+            tabcontent[i].classList.add('block');
+            target.classList.add("bg-zinc-700");
+        });
+    });
+    console.log('a')
+</script>
+</html>
