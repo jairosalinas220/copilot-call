@@ -4,7 +4,7 @@
     "version": "1.0",
     "description": "Genera comentarios formateados para direcciones.",
     "icons": {
-        "48": "./images.jpg"
+        "48": "images.jpg"
     },
     "permissions": ["scripting", "activeTab", "sidePanel"],
     "host_permissions": ["*://dribbble.com/*"],
