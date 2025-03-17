@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "Generador de Comentarios",
+    "version": "1.0",
+    "description": "Genera comentarios formateados para direcciones.",
+    "icons": {
+        "48": "./images.jpg"
+    },
+    "permissions": ["scripting", "activeTab", "sidePanel"],
+    "host_permissions": ["*://dribbble.com/*"],
+    "action": {
+        "default_title": "abre copilot"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://dribbble.com/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "side_panel": {
+        "default_path": "index.html"
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}
