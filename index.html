@@ -4,25 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copilot</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <style>
-        * {
-            scrollbar-width: none;
-        }
-    </style>
+    <link href="./output.css" rel="stylesheet">
 </head>
-<body class="bg-black text-white">
+<body class="bg-gray-900 text-white font-roboto list-none">
     <div class="max-w-2xl mx-auto flex flex-col items-center gap-8 p-5">
         <h1 class="text-3xl font-semibold">Dirección</h1>
         <div class="flex flex-wrap justify-center w-full gap-2.5">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" onpaste="distribuirTexto(event)" name="postal code" placeholder="Código postal" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="region" placeholder="Región" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="commune" placeholder="Comuna" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="locality" placeholder="Localidad" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="address" placeholder="Calle" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="address_number" placeholder="Número" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="inside" placeholder="Interior" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="coordinates" placeholder="Cordenadas" oninput="updateComment()" autocomplete="off">
+            <input type="text" class="input-box central bg-neutral-800 rounded-lg p-2.5" name="postal code" placeholder="Código postal" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="region" placeholder="Región" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="commune" placeholder="Comuna" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="locality" placeholder="Localidad"  autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="address" placeholder="Calle" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="address_number" placeholder="Número" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="inside" placeholder="Interior" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="coordinates" placeholder="Cordenadas" autocomplete="off">
         </div>
         <h1 class="text-3xl font-semibold">Comentario</h1>
         <div class="flex p-1 h-fit gap-8 rounded-lg">
@@ -30,178 +25,141 @@
             <button class="tablink cursor-pointer bg-zinc-700 hover:bg-gray-800">ContraEntrega</button>
         </div>
         <div class="tabcontent flex flex-wrap justify-center w-full gap-3" id="blueexpress">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_description" placeholder="Desc. Casa" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="reference" placeholder="Referencia" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_side" placeholder="Calle de la casa del lado" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_description_side" placeholder="Desc. Casa del lado" oninput="updateComment()" autocomplete="off">
-            <input type="number" class="input-box bg-neutral-800 rounded-lg p-2.5" name="number" placeholder="Número Adiccional" oninput="updateComment()" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_description" placeholder="Desc. Casa" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="reference" placeholder="Referencia" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_side" placeholder="Calle de la casa del lado" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_description_side" placeholder="Desc. Casa del lado" autocomplete="off">
+            <input type="number" class="input-box bg-neutral-800 rounded-lg p-2.5" name="number" placeholder="Número Adiccional" autocomplete="off">
             <div class="product-input-container">
-                <input name="input_products" class="input-box bg-neutral-800 rounded-lg p-2.5 w-full" placeholder="Producto" oninput="updateComment()" autocomplete="off">
+                <input name="input_products" class="input-box bg-neutral-800 rounded-lg p-2.5 w-full" placeholder="Producto" autocomplete="off">
                 <div class="list-products bg-gray-800 absolute p-2 w-52 hidden max-h-52 overflow-y-auto"></div>
             </div>
             <h1 class="text-3xl font-semibold">Comentario Final</h1>
-            <textarea class="bg-neutral-800 rounded-lg p-2.5 w-full min-h-20" name="final_comment" placeholder="Comentario final" autocomplete="off" style="overflow-y: auto; resize: none;"></textarea>
-            <div class="tabcontent flex flex-wrap justify-center w-full gap-3 hidden" id="contraentrega">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="streets" placeholder="Entre Calles" oninput="updateComment()" autocomplete="off">
-            <input type="number" class="input-box bg-neutral-800 rounded-lg p-2.5" name="number" placeholder="Número Adiccional" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="reference" placeholder="Referencias" oninput="updateComment()" autocomplete="off">
-            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_description" placeholder="Desc. Casa" oninput="updateComment()" autocomplete="off">
-            <input type="date" class="input-box bg-neutral-800 rounded-lg p-2.5" name="date" placeholder="Fecha" oninput="updateComment()" autocomplete="off">
+            <textarea class="bg-neutral-800 rounded-lg p-2.5 w-full min-h-20" name="final_comment" placeholder="Comentario final" autocomplete="off" style="overflow-y: auto; resize: none;"></textarea>        </div>
+        <div class="tabcontent flex flex-wrap justify-center w-full gap-3 hidden" id="contraentrega">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="streets" placeholder="Entre Calles" autocomplete="off">
+            <input type="number" class="input-box bg-neutral-800 rounded-lg p-2.5" name="number" placeholder="Número Adiccional" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="reference" placeholder="Referencias" autocomplete="off">
+            <input type="text" class="input-box bg-neutral-800 rounded-lg p-2.5" name="house_description" placeholder="Desc. Casa"  autocomplete="off">
+            <input type="date" class="input-box bg-neutral-800 rounded-lg p-2.5" name="date" placeholder="Fecha" autocomplete="off">
             <div class="product-input-container">
-                <input name="input_products" class="input-box bg-neutral-800 rounded-lg p-2.5 w-full" placeholder="Producto" oninput="updateComment()" autocomplete="off">
+                <input name="input_products" class="input-box bg-neutral-800 rounded-lg p-2.5 w-full" placeholder="Producto" autocomplete="off">
                 <div class="list-products bg-gray-800 absolute p-2 w-52 hidden max-h-52 overflow-y-auto"></div>
             </div>
             <textarea class="bg-neutral-800 rounded-lg p-2.5 w-full min-h-20" name="final_comment" placeholder="Comentario final" autocomplete="off" style="overflow-y: auto; resize: none;"></textarea>
+            <button id="delete" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 cursor-pointer">Eliminar todo</button>
         </div>
-        <button class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 cursor-pointer" onclick="deleteAll()">Eliminar todo</button>
+        <div class="flex flex-wrap gap-3">
+            <div class="bg-blue-500 py-2 px-3 rounded-lg">
+                <span class="font-bold text-xl">No Answer</span>
+                <div class="py-4 flex flex-wrap gap-3">
+                    <div class="px-3 w-full">
+                        <h2 class="bg-blue-300 text-black text-center py-2">No Contesta</h2>
+                        <p name="update_date" class="bg-white text-black px-2 py-1.5">2 marcaciones no contesta</p>
+                        <p name="update_date" class="bg-white text-black px-2 py-1.5">2 marcaciones sin tono</p>
+                        <p name="update_date" class="bg-white text-black px-2 py-1.5">2 marcaciones numero sin servicio o numero no disponible</p>
+                        <p name="update_date" class="bg-white text-black px-2 py-1.5">contesta y cuelga sin informacion</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-blue-300 text-black text-center py-2">No Contesta</h2>
+                        <p name="update_date" class="bg-white text-black p-1.5">2 marcaciones buzon de voz directo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-500 py-2 px-3 rounded-lg">
+                <span class="font-bold text-xl">Recall</span>
+                <div class="py-4 flex flex-wrap gap-3">
+                    <div class="px-3 w-full">
+                        <h2 class="bg-gray-300 text-black text-center py-2">RECALL SIN INFORMACION / Incomodo de Hablar - Mala Conexión
+                        </h2>
+                        <p class="bg-white text-black px-2 py-1.5">Seguimiento Recall Sin Información Cliente indica llamar a las 15 hrs</p>
+                        <p class="bg-white text-black px-2 py-1.5">Seguimiento Recall Cliente Sin Información Buzón de Voz</p>
+                        <p class="bg-white text-black px-2 py-1.5">Seguimiento Recall Cliente Sin Información No Contesta</p>
+                        <p class="bg-white text-black px-2 py-1.5">cliente indica estar conduciendo llamar a las 15 hrs</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-gray-300 text-black text-center py-2">RECALL CON INFORMACION / PRE-ORDEN</h2>
+                        <p class="bg-white text-black p-1.5">Seguimiento Recall Cliente Con Información No Contesta</p>
+                        <p class="bg-white text-black p-1.5">Seguimiento Recall Con Información Cliente indica llamar a las 15 hrs</p>
+                        <p class="bg-white text-black p-1.5">Seguimiento Recall Cliente Con Información Buzon de voz</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-red-500 py-2 px-3 rounded-lg">
+                <span class="font-bold text-xl">No Answer</span>
+                <div class="py-4 flex flex-wrap gap-3">
+                    <div class="px-3 w-full">
+                        <h2 class="bg-red-300 text-black text-center py-2">Pensará (Consultará)</h2>
+                        <p class="bg-white text-black px-2 py-1.5">El cliente ingresará nuevamente a la página web</p>
+                        <p class="bg-white text-black px-2 py-1.5">Cliente indica no tener dinero en este momento</p>
+                        <p class="bg-white text-black px-2 py-1.5">Cliente indica comprar cuando cobre su salario</p>
+                        <p class="bg-white text-black px-2 py-1.5">cliente indica estar de viaje volver a ingresar en la pagina web</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-red-300 text-black text-center py-2">Muy caro</h2>
+                        <p class="bg-white text-black p-1.5">indica que el producto es demasiado caro</p>
+                        <p class="bg-white text-black p-1.5">cliente indica que solo solicita informacion</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-red-300 text-black text-center py-2">Críticas negativas</h2>
+                        <p class="bg-white text-black p-1.5">Cliente indica recibir malos comentarios</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-red-300 text-black text-center py-2">Colgó y no responde más</h2>
+                        <p class="bg-white text-black p-1.5">Recall con informacion y no responde mas</p>
+                        <p class="bg-white text-black p-1.5">Exceso de recall</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-red-300 text-black text-center py-2">Contra indicaciones medicas</h2>
+                        <p class="bg-white text-black p-1.5">El cliente no puede tomar el producto debido a una alergia a los ingredientes</p>
+                        <p class="bg-white text-black p-1.5">Cliente indica que esta embarazada y consultara a su medico</p>
+                    </div>  
+                </div>
+            </div>
+            <div class="bg-yellow-500 py-2 px-3 rounded-lg">
+                <span class="font-bold text-xl">No Answer</span>
+                <div class="py-4 flex flex-wrap gap-3">
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">Duplicado de orden</h2>
+                        <p class="bg-white text-black px-2 py-1.5">cliente indica haber ya solicitado el producto</p>
+                        <p class="bg-white text-black px-2 py-1.5">CLIENTE INDICA QUE RECIBIO PRODUCTO Y/O CANTIDAD INCORRECTA</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">Spam</h2>
+                        <p class="bg-white text-black p-1.5">cliente indica NO haber solicitado el producto</p>
+                        <p class="bg-white text-black p-1.5">orden de broma</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">Producto/promoción incorrecta</h2>
+                        <p class="bg-white text-black p-1.5">MALA PUBLICIDAD cliente indica haber visto otro precio en la publicidad ( colocar precio )</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">No es cliente/spam/menor de edad</h2>
+                        <p class="bg-white text-black p-1.5">cliente indica que el numero esta equivocado</p>
+                        <p class="bg-white text-black p-1.5">Ordenes que vengan con el nombre "Test" o un patrón de letras raras (juiwdbh)</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">Numero no existe</h2>
+                        <p class="bg-white text-black p-1.5">Número no existe</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">Devolucion de pedido entregado</h2>
+                        <p class="bg-white text-black p-1.5">cliente indica NO haber solicitado el producto</p>
+                        <p class="bg-white text-black p-1.5">CLIENTE INDICA QUE RECIBIÓ PRODUCTO DEFECTUOSO</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">Consulta sobre pedido no entregado</h2>
+                        <p class="bg-white text-black p-1.5">Cliente esta esperando su pedido, que aun no llega</p>
+                    </div>
+                    <div class="px-3 w-full">
+                        <h2 class="bg-yellow-300 text-black text-center py-2">Fuera de la zona de entrega</h2>
+                        <p class="bg-white text-black p-1.5">Comuna, localidad FZC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span>Hecho por Jairo :)</span>
+        <script src="./index.js"></script>
+        <div class="hidden bg-gray-600">
 </body>
-<script>
-    var currier = "blueexpress";
-    const products = [
-        "5 duston gel + 4 duston gel gift 184950",
-        "4 duston gel + 3 duston gel gift 147960",
-        "3 duston gel + 2 duston gel gift 110970",
-        "2 duston gel + 1 duston gel gift 73980",
-        "1 duston gel 37990 + delivery 6000",
-        "5 incasol + 4 incasol gift 184950",
-        "4 incasol + 3 incasol gift 147960",
-        "3 incasol + 2 incasol gift 110970",
-        "2 incasol + 1 incasol gift 73980",
-        "1 incasol 37990 + delivery 6000",
-        "5 lutevid + 4 lutevid gift 184950",
-        "4 lutevid + 3 lutevid gift 147960",
-        "3 lutevid + 2 lutevid gift 110970",
-        "2 lutevid + 1 lutevid gift 73980",
-        "1 lutevid 37990 + delivery 6000",
-        "5 elastica + 4 elastica gift 184950",
-        "4 elastica + 3 elastica gift 147960",
-        "3 elastica + 2 elastica gift 110970",
-        "2 elastica + 1 elastica gift 73980",
-        "1 elastica 37990 + delivery 6000",
-        "5 oxys + 4 oxys gift 184950",
-        "4 oxys + 3 oxys gift 147960",
-        "3 oxys + 2 oxys gift 110970",
-        "2 oxys + 1 oxys gift 73980",
-        "1 oxys 37990 + delivery 6000"
-    ];  
-    function deleteAll () {
-        document.querySelectorAll(".input-box").forEach(input => {
-            input.value = "";
-        });
-    }
-    function obtenerValor(nombre) {
-        let valor = "";
-        document.querySelectorAll(`[name="${nombre}"]`).forEach(input => {
-            if (input.closest(`#${currier}`)) {
-                valor = input.value.trim();
-            }
-        });
-        return valor;
-    }
-    function updateComment() {
-        const region = document.getElementsByName("region")[0].value.trim();
-        const commune = document.getElementsByName("commune")[0].value.trim();
-        const locality = document.getElementsByName("locality")[0].value.trim();
-        const address = document.getElementsByName("address")[0].value.trim();
-        const address_number = document.getElementsByName("address_number")[0].value.trim();
-        // const streets = document.getElementsByName("streets")[0].value.trim();
-        // const reference = document.getElementsByName("reference")[0].value.trim();
-        // const house_description = document.getElementsByName("house_description")[0].value.trim();
-        // const house_description_side = document.getElementsByName("house_description_side")[0].value.trim();
-        // const house_side = document.getElementsByName("house_side")[0].value.trim();
-        // const additionalNumber = document.getElementsByName("number")[0].value.trim() ? `${document.getElementsByName("number")[0].value.trim()} WH` : "WH";
-        // const product = document.getElementsByName("input_products")[0].value.trim();
-        // const dateString = document.getElementsByName("date")[0].value.trim();
-        const streets = obtenerValor("streets");
-        const reference = obtenerValor("reference");
-        const house_description = obtenerValor("house_description");
-        const house_description_side = obtenerValor("house_description_side");
-        const house_side = obtenerValor("house_side");
-        const additionalNumber = obtenerValor("number") ? `${obtenerValor("number")} WH` : "WH";
-        const product = obtenerValor("input_products");
-        const dateString = obtenerValor("date");
-        let formattedDate = "";
-        let finalComment;
-        if (currier === "blueexpress") {
-            finalComment = `${locality} / ${address} ${address_number}  / ${reference}, ${house_description} / Al costado de ${house_side} ${house_description_side}/ ${additionalNumber} / ${product}`.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
-        } else {
-            const date = new Date(dateString  + "T00:00:00");
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear();
-        formattedDate = `${day}-${month}-${year}`;
-            finalComment = `${region} / ${commune} / ${locality} / ${address} ${address_number} ${streets} / ${additionalNumber} /${reference}, ${house_description} / ${dateString} / ${house_side} / ${additionalNumber} / ${product}`.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
-        }
-        document.querySelectorAll("[name=final_comment]").forEach(
-            input => input.value = finalComment
-        )
-    }
-    document.querySelectorAll(".product-input-container input").forEach(input => {
-        input.addEventListener('input', (event) => {
-            const container = event.target.parentElement;
-            const list = container.querySelector(".list-products");
-            const filtro = event.target.value.toLowerCase();
-            const productosFiltrados = products.filter(producto =>
-                producto.toLowerCase().includes(filtro)
-            );
-            showProducts(productosFiltrados, list, event.target);
-        });
-
-        input.addEventListener("focus", (event) => {
-            const container = event.target.parentElement;
-            container.querySelector(".list-products").classList.remove("hidden");
-        });
-    });
-    function showProducts(productosFinals, list, input) {
-        list.innerHTML = '<ul class="list-none p-0 m-0">';
-        productosFinals.forEach(producto => {
-            list.innerHTML += `<li class="p-1 cursor-pointer hover:bg-blue-800">${producto}</li>`;
-        });
-        list.innerHTML += '</ul>';
-
-        list.querySelectorAll('li').forEach(item => {
-            item.addEventListener('click', () => {
-                input.value = item.textContent;
-                list.classList.add('hidden');
-            });
-        });
-    }
-    document.addEventListener('click', (event) => {
-        document.querySelectorAll(".list-products").forEach(list => {
-            const input = list.parentElement.querySelector("input");
-            if (!list.classList.contains('hidden') &&
-                event.target !== input &&
-                !list.contains(event.target)) {
-                list.classList.add('hidden');
-            }
-        });
-    });
-    function distribuirTexto(event) {
-        event.preventDefault();
-        const textPaste = (event.clipboardData || window.clipboardData).getData('text');
-        let textDiv = textPaste.split("\t");
-        let inputs = document.querySelectorAll(".input-box");
-        for (let i = 0; i < inputs.length; i++) {
-            if (textDiv[i]) {
-                inputs[i].value = textDiv[i];
-            }
-        }
-    }
-
-    const tablinks = document.querySelectorAll(".tablink");
-    const tabcontent = document.querySelectorAll(".tabcontent");
-    tablinks.forEach((tablink, i) => {
-        tablink.addEventListener("click", () => {
-            target = tablink
-            tablinks.forEach((tab, j) => {
-                tab.classList.remove("bg-zinc-700");
-                tabcontent[j].classList.add('hidden');
-            });;
-            i === 0 ? currier = "blueexpress" : currier = "contraentrega";
-            console.log(currier)
-            tabcontent[i].classList.remove('hidden');
-            target.classList.add("bg-zinc-700");
-        });
-    });
-</script>
 </html>
